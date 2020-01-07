@@ -1,4 +1,4 @@
-# NYUv2 Python Toolkits
+# NYUv2 Python Toolkit
 
 <div>
 <img src="test/image.png"        width="18%">
