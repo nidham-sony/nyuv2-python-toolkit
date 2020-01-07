@@ -1,9 +1,7 @@
 import os
 import sys
-import cv2
 import h5py
 import argparse
-import multiprocessing
 import numpy as np
 from skimage import io
 from scipy.io import loadmat
@@ -12,7 +10,6 @@ import shutil
 import matplotlib
 import matplotlib.pyplot as plt
 import zipfile
-
 
 def colormap(N=256, normalized=False):
     def bitget(byteval, idx):
