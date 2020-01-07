@@ -1,3 +1,58 @@
+# NYUv2 Python Toolkits
+
+<div>
+<img src="test/image.png"        width="18%">
+<img src="test/semantic13.png"   width="18%">
+<img src="test/semantic40.png"   width="18%">
+<img src="test/depth.png"        width="18%">
+<img src="test/normal.png"       width="18%">
+</div>
+
+This repo provides extraction tools and a pytorch dataloader written in python for NYUv2 dataset. All meta data comes from [ankurhanda/nyuv2-meta-data](https://github.com/ankurhanda/nyuv2-meta-data) 
+
+Supported Tasks:
+
+* Semantic Segmentation (13 classes and 40 classes)
+* Depth Estimation
+* Normal
+
+## Extraction
+
+```bash
+bash download_and_extract.sh
+```
+or 
+
+```bash
+wget http://horatio.cs.nyu.edu/mit/silberman/nyu_depth_v2/nyu_depth_v2_labeled.mat
+wget https://inf.ethz.ch/personal/ladickyl/nyu_normals_gt.zip
+
+python extract_nyuv2.py --mat nyu_depth_v2_labeled.mat --normal_zip nyu_normals_gt.zip  --data_root NYUv2 --save_colored
+```
+All images and labels will be extracted to ./NYUv2 as the following:
+
+```
+NYUv2/
+    /image
+        /train
+            00003.png
+            00004.png
+            ...
+        /test
+    /seg13
+        /train
+            00003.png
+            00004.png
+            ...
+        /test
+    /seg40
+    /depth
+    /normal
+```
+
+
+# nyuv2-meta-data
+
 ## What does this repository contain?
 
 This repository contains 13 class labels for both train and test dataset in NYUv2. This is to avoid any hassle involved in parsing the data from the .mat files. If you are looking to train a network to do 13 class segmentation from RGB data, then this repository can provide you both the training/test dataset as well the corresponding ground truth labels. However, if your networks needs additionally depth data (either depth image or DHA features) then you will need to download the dataset from the [NYUv2 website](http://horatio.cs.nyu.edu/mit/silberman/nyu_depth_v2/nyu_depth_v2_labeled.mat) (~2.8GB) as well as the corresponding [toolbox](http://cs.nyu.edu/~silberman/code/toolbox_nyu_depth_v2.zip). To summarise, this repository contains the following
