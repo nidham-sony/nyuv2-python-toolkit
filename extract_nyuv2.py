@@ -141,8 +141,8 @@ if __name__ == '__main__':
         labels = fr["labels"]
         depths = fr["depths"]
 
-        #extract_images(np.array(images), splits, IMAGE_DIR)
-        #extract_labels(np.array(labels), splits, SEG40_DIR, SEG13_DIR, save_colored=args.save_colored )
+        extract_images(np.array(images), splits, IMAGE_DIR)
+        extract_labels(np.array(labels), splits, SEG40_DIR, SEG13_DIR, save_colored=args.save_colored )
         extract_depths(np.array(depths), splits, DEPTH_DIR, save_colored=args.save_colored)
 
         if args.normal_zip is not None and os.path.exists(args.normal_zip):
