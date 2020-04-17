@@ -33,21 +33,21 @@ All images and labels will be extracted to ./NYUv2 as the following:
 
 ```
 NYUv2/
-    /image
-        /train
+    image/
+        train/
             00003.png
             00004.png
             ...
-        /test
-    /seg13
-        /train
+        test/
+    seg13/
+        train/
             00003.png
             00004.png
             ...
-        /test
-    /seg40
-    /depth
-    /normal
+        test/
+    seg40/
+    depth/
+    normal/
 ```
 
 
