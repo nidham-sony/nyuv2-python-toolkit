@@ -50,9 +50,12 @@ def extract_labels(labels, splits, SEG40_DIR, SEG13_DIR, save_colored=True):
     mapping40 = np.insert(mapping40, 0, 0)
     mapping13 = np.insert(mapping13, 0, 0)
     labels = labels.transpose([0, 2, 1])
-
     labels_40 = mapping40[labels]
-    labels_13 = mapping13[labels_40]
+    labels_13 = mapping13[labels_40].astype('uint8')
+
+    labels_40 = labels_40.astype('uint8') - 1
+    labels_13 = labels_13.astype('uint8') - 1
+    #print( np.unique( labels_13 ) )
 
     if save_colored:
         cmap = colormap()
@@ -70,7 +73,7 @@ def extract_labels(labels, splits, SEG40_DIR, SEG13_DIR, save_colored=True):
             path = os.path.join(SEG40_DIR, s, '%05d.png' % (idx))
             io.imsave(path, lbl, check_contrast=False)
             if save_colored:
-                colored_lbl = cmap[lbl]
+                colored_lbl = cmap[lbl+1]
                 io.imsave('colored_40/%05d.png' % idx, colored_lbl)
 
     print("Extracting labels (13 classes)...")
@@ -83,7 +86,7 @@ def extract_labels(labels, splits, SEG40_DIR, SEG13_DIR, save_colored=True):
             path = os.path.join(SEG13_DIR, s, '%05d.png' % (idx))
             io.imsave(path, lbl, check_contrast=False)
             if save_colored:
-                colored_lbl = cmap[lbl]
+                colored_lbl = cmap[lbl+1]
                 io.imsave('colored_13/%05d.png' % idx, colored_lbl)
 
 
@@ -141,9 +144,9 @@ if __name__ == '__main__':
         labels = fr["labels"]
         depths = fr["depths"]
 
-        extract_images(np.array(images), splits, IMAGE_DIR)
         extract_labels(np.array(labels), splits, SEG40_DIR, SEG13_DIR, save_colored=args.save_colored )
         extract_depths(np.array(depths), splits, DEPTH_DIR, save_colored=args.save_colored)
+        extract_images(np.array(images), splits, IMAGE_DIR)
 
         if args.normal_zip is not None and os.path.exists(args.normal_zip):
             NORMAL_DIR = os.path.join(DATA_ROOT, 'normal')
