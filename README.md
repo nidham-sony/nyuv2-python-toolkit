@@ -8,7 +8,7 @@
 <img src="test/normal.png"       width="18%">
 </div>
 
-This repo provides extraction tools and a pytorch dataloader written for NYUv2 dataset. All meta data comes from [ankurhanda/nyuv2-meta-data](https://github.com/ankurhanda/nyuv2-meta-data) 
+This repo provides extraction tools and a pytorch dataloader for NYUv2 dataset. All meta data comes from [ankurhanda/nyuv2-meta-data](https://github.com/ankurhanda/nyuv2-meta-data) 
 
 Supported Tasks:
 
