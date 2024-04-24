@@ -125,6 +125,8 @@ def normal_to_rgb(normal):
 
 
 def extract_normals(normal_zip: str, data_root: str, splits: dict) -> None:
+    print("Extracting normals (1449 iters)...")
+
     # prepare directories
     normal_test = Path(data_root) / "normal/test"
     normal_test.mkdir(exist_ok=True, parents=True)
@@ -145,7 +147,7 @@ def extract_normals(normal_zip: str, data_root: str, splits: dict) -> None:
     reference_train = splits["trainNdxs"].reshape(-1)
 
     # save raw data in proper directory
-    for idx, f_name in enumerate(data["all_filenames"]):
+    for idx, f_name in tqdm(enumerate(data["all_filenames"])):
         if int(f_name) in reference_test:
             out_path = normal_test / f"{f_name[1:]}.npy"
             out_path_png = normal_test / f"{f_name[1:]}.png"
@@ -207,18 +209,7 @@ if __name__ == "__main__":
         labels = fr["labels"]
         depths = fr["depths"]
 
-        extract_labels(
-            np.array(labels),
-            splits,
-            SEG40_DIR,
-            SEG13_DIR,
-            save_colored=args.save_colored,
-        )
-        extract_depths(
-            np.array(depths), splits, DEPTH_DIR, save_colored=args.save_colored
-        )
-        extract_images(np.array(images), splits, IMAGE_DIR)
-
+        # extrac
         if args.normal_zip is not None and os.path.exists(args.normal_zip):
             extract_normals(args.normal_zip, DATA_ROOT, splits)
 
